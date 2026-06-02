@@ -36,12 +36,13 @@ Key points to focus on:
 Resources available:
 {instrument_context}
 Market research report: {market_research_report}
-Social media sentiment report: {sentiment_report}
+Sentiment report: {sentiment_report}
 Latest world affairs news: {news_report}
 {fundamentals_label}: {fundamentals_report}
 Conversation history of the debate: {history}
 Last bear argument: {current_response}
-Use this information to deliver a compelling bull argument, refute the bear's concerns, and engage in a dynamic debate that demonstrates the strengths of the bull position.
+
+Base every factual claim in your argument on the reports provided above. When citing evidence, name the source report (e.g. "per Market research report: …"). Use this information to deliver a compelling bull argument, refute the bear's concerns, and engage in a dynamic debate that demonstrates the strengths of the bull position.
 """ + get_language_instruction()
 
         response = llm.invoke(prompt)

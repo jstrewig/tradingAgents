@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from tradingagents.agents.utils.agent_utils import (
     get_instrument_context_from_state,
@@ -20,9 +22,30 @@ def create_news_analyst(llm):
             get_global_news,
         ]
 
+        seven_days_ago = (
+            datetime.strptime(current_date, "%Y-%m-%d") - timedelta(days=7)
+        ).strftime("%Y-%m-%d")
+
         system_message = (
-            f"You are a news researcher tasked with analyzing recent news and trends over the past week. Please write a comprehensive report of the current state of the world that is relevant for trading and macroeconomics. Use the available tools: get_news(query, start_date, end_date) for {asset_label}-specific or targeted news searches, and get_global_news(curr_date, look_back_days, limit) for broader macroeconomic news. Provide specific, actionable insights with supporting evidence to help traders make informed decisions."
-            + """ Make sure to append a Markdown table at the end of the report to organize key points in the report, organized and easy to read."""
+            f"You are a news analyst tasked with researching recent news relevant to trading and macroeconomics.\n\n"
+            f"**Tool call order:**\n"
+            f"1. Call `get_news(query, start_date, end_date)` with `start_date = {seven_days_ago}` and "
+            f"`end_date = {current_date}` for {asset_label}-specific news "
+            f"(use the ticker or {asset_label} name as the query).\n"
+            f"2. Call `get_global_news(curr_date, look_back_days=7, limit=20)` for broader macroeconomic "
+            f"and sector-level context.\n\n"
+            f"**Grounding rules:**\n"
+            f"- Cite the article headline and publication date from tool output for every factual claim.\n"
+            f"- Do not assert any news event, earnings release, or market development that does not appear "
+            f"in the tool response. If the tool returns no results for a query, state that explicitly rather "
+            f"than fabricating coverage.\n\n"
+            f"**Report structure:**\n"
+            f"1. **{asset_label.title()} News** — material events, earnings, product launches, regulatory "
+            f"actions, or analyst actions directly concerning the {asset_label}.\n"
+            f"2. **Macroeconomic & Sector Context** — relevant macro headlines, sector trends, or "
+            f"geopolitical developments from `get_global_news`.\n\n"
+            f"Provide specific, actionable insights with supporting evidence to help traders make informed decisions."
+            + " Make sure to append a Markdown table at the end of the report to organize key points, organized and easy to read."
             + get_language_instruction()
         )
 
@@ -30,13 +53,8 @@ def create_news_analyst(llm):
             [
                 (
                     "system",
-                    "You are a helpful AI assistant, collaborating with other assistants."
-                    " Use the provided tools to progress towards answering the question."
-                    " If you are unable to fully answer, that's OK; another assistant with different tools"
-                    " will help where you left off. Execute what you can to make progress."
-                    " If you or any other assistant has the FINAL TRANSACTION PROPOSAL: **BUY/HOLD/SELL** or deliverable,"
-                    " prefix your response with FINAL TRANSACTION PROPOSAL: **BUY/HOLD/SELL** so the team knows to stop."
-                    " You have access to the following tools: {tool_names}.\n{system_message}"
+                    "You are a specialist analyst. "
+                    "You have access to the following tools: {tool_names}.\n{system_message}"
                     "For your reference, the current date is {current_date}. {instrument_context}",
                 ),
                 MessagesPlaceholder(variable_name="messages"),

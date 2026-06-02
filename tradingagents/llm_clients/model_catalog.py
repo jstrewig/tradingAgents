@@ -135,7 +135,6 @@ MODEL_OPTIONS: ProviderModeOptions = {
         "mid": [
             ("Gemini 2.5 Flash - Balanced, stable", "gemini-2.5-flash"),
             ("Gemini 3.5 Flash - Latest GA, strong agentic + coding", "gemini-3.5-flash"),
-            ("Gemini 2.5 Pro - Stable pro model", "gemini-2.5-pro"),
         ],
         "deep": [
             ("Gemini 3.1 Pro - Reasoning-first, complex workflows (preview)", "gemini-3.1-pro-preview"),

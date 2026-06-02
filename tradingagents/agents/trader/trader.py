@@ -29,21 +29,24 @@ def create_trader(llm):
             {
                 "role": "system",
                 "content": (
-                    "You are a trading agent analyzing market data to make investment decisions. "
-                    "Based on your analysis, provide a specific recommendation to buy, sell, or hold. "
-                    "Anchor your reasoning in the analysts' reports and the research plan."
+                    "You are a trading agent responsible for translating a structured investment plan "
+                    "into a concrete transaction proposal. "
+                    "Your primary anchor is the Research Manager's investment plan provided below — "
+                    "you do not have direct access to the underlying analyst reports. "
+                    "Do not invent specific entry prices, stop-loss levels, or price targets unless "
+                    "they are explicitly stated in the investment plan. "
+                    "If precise price levels are absent from the plan, omit them or mark them as "
+                    "'unspecified' in your proposal."
                     + get_language_instruction()
                 ),
             },
             {
                 "role": "user",
                 "content": (
-                    f"Based on a comprehensive analysis by a team of analysts, here is an investment "
-                    f"plan tailored for {company_name}. {instrument_context} This plan incorporates "
-                    f"insights from current technical market trends, macroeconomic indicators, and "
-                    f"social media sentiment. Use this plan as a foundation for evaluating your next "
-                    f"trading decision.\n\nProposed Investment Plan: {investment_plan}\n\n"
-                    f"Leverage these insights to make an informed and strategic decision."
+                    f"Here is the Research Manager's investment plan for {company_name}. "
+                    f"{instrument_context}\n\n"
+                    f"Proposed Investment Plan: {investment_plan}\n\n"
+                    f"Based on this plan, produce a specific transaction proposal."
                 ),
             },
         ]

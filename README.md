@@ -224,8 +224,9 @@ from tradingagents.default_config import DEFAULT_CONFIG
 
 config = DEFAULT_CONFIG.copy()
 config["llm_provider"] = "openai"        # openai, google, anthropic, xai, deepseek, qwen, qwen-cn, glm, glm-cn, minimax, minimax-cn, openrouter, ollama, azure
-config["deep_think_llm"] = "gpt-5.5"     # Model for complex reasoning
-config["quick_think_llm"] = "gpt-5.4-mini" # Model for quick tasks
+config["deep_think_llm"] = "gpt-5.5"      # Model for complex reasoning (Research Manager, Trader, Portfolio Manager)
+config["mid_think_llm"] = "gpt-4.1"       # Model for mid-tier agents (fundamentals analyst, risk debators)
+config["quick_think_llm"] = "gpt-5.4-mini" # Model for quick tasks (market, social, news analysts)
 config["max_debate_rounds"] = 2
 
 ta = TradingAgentsGraph(debug=True, config=config)
@@ -277,6 +278,7 @@ To reduce variation you can lower the sampling temperature. Set `temperature` in
 config = DEFAULT_CONFIG.copy()
 config["llm_provider"] = "openai"
 config["deep_think_llm"] = "gpt-4.1"      # non-reasoning model honors temperature
+config["mid_think_llm"] = "gpt-4.1"
 config["quick_think_llm"] = "gpt-4.1"
 config["temperature"] = 0.0
 ```

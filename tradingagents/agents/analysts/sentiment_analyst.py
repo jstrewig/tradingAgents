@@ -83,10 +83,7 @@ def create_sentiment_analyst(llm):
             [
                 (
                     "system",
-                    "You are a helpful AI assistant, collaborating with other assistants."
-                    " If you or any other assistant has the FINAL TRANSACTION PROPOSAL: **BUY/HOLD/SELL** or deliverable,"
-                    " prefix your response with FINAL TRANSACTION PROPOSAL: **BUY/HOLD/SELL** so the team knows to stop."
-                    "\n{system_message}\n"
+                    "{system_message}\n"
                     "For your reference, the current date is {current_date}. {instrument_context}",
                 ),
                 MessagesPlaceholder(variable_name="messages"),
@@ -170,6 +167,8 @@ Community discussion. Engagement signal via upvote score and comment count. Subr
 7. **Identify catalysts and risks** that emerge across sources — news of upcoming earnings, product launches, competitive threats, macro headlines, etc.
 
 8. **Past sentiment is not predictive.** Frame your conclusions as signal for the trader to weigh alongside fundamentals and technicals, not as a price call.
+
+9. **Never fabricate posts, headlines, or usernames.** Only quote, paraphrase, or reference content that appears inside a `<start_of_*> … <end_of_*>` block above. If a source block is empty or unavailable, say so rather than inventing content.
 
 ## Output fields
 

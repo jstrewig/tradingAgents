@@ -37,6 +37,8 @@ def create_research_manager(llm):
 
 Commit to a clear stance whenever the debate's strongest arguments warrant one; reserve Hold for situations where the evidence on both sides is genuinely balanced.
 
+Do not introduce any facts, figures, or news items that are not present in the Debate History below.
+
 ---
 
 **Debate History:**
