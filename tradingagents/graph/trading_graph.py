@@ -32,6 +32,7 @@ from tradingagents.agents.utils.agent_utils import (
     resolve_instrument_identity,
     get_stock_data,
     get_indicators,
+    get_verified_market_snapshot,
     get_fundamentals,
     get_balance_sheet,
     get_cashflow,
@@ -181,6 +182,8 @@ class TradingAgentsGraph:
                     get_stock_data,
                     # Technical indicators
                     get_indicators,
+                    # Verified snapshot for grounding price/indicator claims
+                    get_verified_market_snapshot,
                 ]
             ),
             "social": ToolNode(
@@ -204,6 +207,8 @@ class TradingAgentsGraph:
                     get_balance_sheet,
                     get_cashflow,
                     get_income_statement,
+                    # Insider activity
+                    get_insider_transactions,
                 ]
             ),
         }
