@@ -63,6 +63,7 @@ class TestCliSkipsPromptsFromEnv(unittest.TestCase):
              mock.patch.object(m, "select_llm_provider") as prompt_provider, \
              mock.patch.object(m, "ask_output_language") as prompt_lang, \
              mock.patch.object(m, "select_shallow_thinking_agent") as prompt_quick, \
+             mock.patch.object(m, "select_mid_thinking_agent") as prompt_mid, \
              mock.patch.object(m, "select_deep_thinking_agent") as prompt_deep:
             sel = m.get_user_selections()
 
@@ -70,6 +71,7 @@ class TestCliSkipsPromptsFromEnv(unittest.TestCase):
         prompt_provider.assert_not_called()
         prompt_lang.assert_not_called()
         prompt_quick.assert_not_called()
+        prompt_mid.assert_not_called()
         prompt_deep.assert_not_called()
         # API key is still verified for the env-configured provider.
         ensure_key.assert_called_once()
@@ -78,6 +80,7 @@ class TestCliSkipsPromptsFromEnv(unittest.TestCase):
         self.assertEqual(sel["llm_provider"], "openai")
         self.assertEqual(sel["backend_url"], "https://opencode.ai/zen/go/v1")
         self.assertEqual(sel["shallow_thinker"], "deepseek-v4-pro")
+        self.assertEqual(sel["mid_thinker"], fake_cfg["mid_think_llm"])
         self.assertEqual(sel["deep_thinker"], "kimi-k2.5")
         self.assertEqual(sel["output_language"], "Japanese")
 

@@ -604,13 +604,18 @@ def get_user_selections():
         # doesn't fail later at the first API call.
         ensure_api_key(selected_llm_provider)
 
-    # Step 7: Thinking agents (skipped when either model is set via environment)
-    if os.environ.get("TRADINGAGENTS_QUICK_THINK_LLM") or os.environ.get("TRADINGAGENTS_DEEP_THINK_LLM"):
+    # Step 7: Thinking agents (skipped when any model tier is set via environment)
+    if (
+        os.environ.get("TRADINGAGENTS_QUICK_THINK_LLM")
+        or os.environ.get("TRADINGAGENTS_MID_THINK_LLM")
+        or os.environ.get("TRADINGAGENTS_DEEP_THINK_LLM")
+    ):
         selected_shallow_thinker = DEFAULT_CONFIG["quick_think_llm"]
+        selected_mid_thinker = DEFAULT_CONFIG["mid_think_llm"]
         selected_deep_thinker = DEFAULT_CONFIG["deep_think_llm"]
         console.print(
             f"[green]✓ Thinking agents from environment:[/green] "
-            f"quick={selected_shallow_thinker}, deep={selected_deep_thinker}"
+            f"quick={selected_shallow_thinker}, mid={selected_mid_thinker}, deep={selected_deep_thinker}"
         )
     else:
         console.print(
@@ -619,6 +624,7 @@ def get_user_selections():
             )
         )
         selected_shallow_thinker = select_shallow_thinking_agent(selected_llm_provider)
+        selected_mid_thinker = select_mid_thinking_agent(selected_llm_provider)
         selected_deep_thinker = select_deep_thinking_agent(selected_llm_provider)
 
     # Step 8: Provider-specific thinking configuration
@@ -668,6 +674,7 @@ def get_user_selections():
         "llm_provider": selected_llm_provider.lower(),
         "backend_url": backend_url,
         "shallow_thinker": selected_shallow_thinker,
+        "mid_thinker": selected_mid_thinker,
         "deep_thinker": selected_deep_thinker,
         "google_thinking_level": thinking_level,
         "openai_reasoning_effort": reasoning_effort,
@@ -997,6 +1004,7 @@ def run_analysis(checkpoint: bool = False):
     config["max_debate_rounds"] = selections["research_depth"]
     config["max_risk_discuss_rounds"] = selections["research_depth"]
     config["quick_think_llm"] = selections["shallow_thinker"]
+    config["mid_think_llm"] = selections["mid_thinker"]
     config["deep_think_llm"] = selections["deep_thinker"]
     config["backend_url"] = selections["backend_url"]
     config["llm_provider"] = selections["llm_provider"].lower()

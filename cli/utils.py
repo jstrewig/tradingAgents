@@ -264,6 +264,11 @@ def select_shallow_thinking_agent(provider) -> str:
     return _select_model(provider, "quick")
 
 
+def select_mid_thinking_agent(provider) -> str:
+    """Select mid-tier thinking llm engine using an interactive selection."""
+    return _select_model(provider, "mid")
+
+
 def select_deep_thinking_agent(provider) -> str:
     """Select deep thinking llm engine using an interactive selection."""
     return _select_model(provider, "deep")

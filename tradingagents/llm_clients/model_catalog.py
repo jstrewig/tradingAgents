@@ -18,6 +18,11 @@ _GLM_MODELS: Dict[str, List[ModelOption]] = {
         ("GLM-4.5-Air - Lightweight, cost-efficient", "glm-4.5-air"),
         ("Custom model ID", "custom"),
     ],
+    "mid": [
+        ("GLM-5 - Flagship, 204K ctx", "glm-5"),
+        ("GLM-4.7 - Previous-gen flagship", "glm-4.7"),
+        ("Custom model ID", "custom"),
+    ],
     "deep": [
         ("GLM-5.1 - Latest flagship, 204K ctx", "glm-5.1"),
         ("GLM-5 - Flagship, 204K ctx", "glm-5"),
@@ -43,6 +48,11 @@ _QWEN_MODELS: Dict[str, List[ModelOption]] = {
         ("Qwen 3.5 Flash - Previous-gen fast", "qwen3.5-flash"),
         ("Custom model ID", "custom"),
     ],
+    "mid": [
+        ("Qwen 3.6 Plus - Vision-language, agentic coding", "qwen3.6-plus"),
+        ("Qwen 3.5 Plus - Previous-gen flagship", "qwen3.5-plus"),
+        ("Custom model ID", "custom"),
+    ],
     "deep": [
         ("Qwen 3.7 Max - Latest flagship reasoning agent, 1M ctx", "qwen3.7-max"),
         ("Qwen 3.6 Plus - Vision-language, agentic coding", "qwen3.6-plus"),
@@ -60,6 +70,12 @@ _MINIMAX_MODELS: Dict[str, List[ModelOption]] = {
         ("MiniMax-M2.7-highspeed - Faster M2.7, 204K ctx, ~100 TPS", "MiniMax-M2.7-highspeed"),
         ("MiniMax-M2.5-highspeed - Previous-gen highspeed, 204K ctx", "MiniMax-M2.5-highspeed"),
         ("MiniMax-M2.1-highspeed - M2.1 highspeed, 204K ctx", "MiniMax-M2.1-highspeed"),
+        ("Custom model ID", "custom"),
+    ],
+    "mid": [
+        ("MiniMax-M2.5 - Previous-gen flagship, 204K ctx", "MiniMax-M2.5"),
+        ("MiniMax-M2.1 - Earlier M2 line, 204K ctx", "MiniMax-M2.1"),
+        ("MiniMax-M2 - Base M2, 204K ctx", "MiniMax-M2"),
         ("Custom model ID", "custom"),
     ],
     "deep": [
@@ -81,6 +97,10 @@ MODEL_OPTIONS: ProviderModeOptions = {
             ("GPT-5.5 - Latest frontier, 1M context", "gpt-5.5"),
             ("GPT-4.1 - Smartest non-reasoning model", "gpt-4.1"),
         ],
+        "mid": [
+            ("GPT-4.1 - Smartest non-reasoning model, strong analysis", "gpt-4.1"),
+            ("GPT-5.4 Mini - Fast, strong coding and tool use", "gpt-5.4-mini"),
+        ],
         "deep": [
             ("GPT-5.5 - Latest frontier, 1M context", "gpt-5.5"),
             ("GPT-5.4 - Previous-gen frontier, 1M context, cost-effective", "gpt-5.4"),
@@ -92,6 +112,10 @@ MODEL_OPTIONS: ProviderModeOptions = {
         "quick": [
             ("Claude Sonnet 4.6 - Best speed and intelligence balance", "claude-sonnet-4-6"),
             ("Claude Haiku 4.5 - Fastest with near-frontier intelligence", "claude-haiku-4-5"),
+            ("Claude Sonnet 4.5 - High-performance for agents and coding", "claude-sonnet-4-5"),
+        ],
+        "mid": [
+            ("Claude Sonnet 4.6 - Best speed and intelligence balance", "claude-sonnet-4-6"),
             ("Claude Sonnet 4.5 - High-performance for agents and coding", "claude-sonnet-4-5"),
         ],
         "deep": [
@@ -108,6 +132,11 @@ MODEL_OPTIONS: ProviderModeOptions = {
             ("Gemini 2.5 Flash - Balanced, stable", "gemini-2.5-flash"),
             ("Gemini 2.5 Flash Lite - Fast, low-cost", "gemini-2.5-flash-lite"),
         ],
+        "mid": [
+            ("Gemini 2.5 Flash - Balanced, stable", "gemini-2.5-flash"),
+            ("Gemini 3.5 Flash - Latest GA, strong agentic + coding", "gemini-3.5-flash"),
+            ("Gemini 2.5 Pro - Stable pro model", "gemini-2.5-pro"),
+        ],
         "deep": [
             ("Gemini 3.1 Pro - Reasoning-first, complex workflows (preview)", "gemini-3.1-pro-preview"),
             ("Gemini 3.5 Flash - Latest GA, strong agentic + coding", "gemini-3.5-flash"),
@@ -121,6 +150,11 @@ MODEL_OPTIONS: ProviderModeOptions = {
             ("Grok Build 0.1 - Coding-specialized, 256K ctx", "grok-build-0.1"),
             ("Grok 4 Fast (Non-Reasoning) - Speed optimized", "grok-4-fast-non-reasoning"),
         ],
+        "mid": [
+            ("Grok 4 Fast (Reasoning) - High-performance", "grok-4-fast-reasoning"),
+            ("Grok 4.3 - Latest flagship, built-in reasoning, 1M ctx", "grok-4.3"),
+            ("Grok 4 - Flagship (dated build)", "grok-4-0709"),
+        ],
         "deep": [
             ("Grok 4.3 - Latest flagship, built-in reasoning, 1M ctx", "grok-4.3"),
             ("Grok 4.20 (Reasoning) - Previous-gen reasoning", "grok-4.20-0309-reasoning"),
@@ -131,6 +165,11 @@ MODEL_OPTIONS: ProviderModeOptions = {
     "deepseek": {
         "quick": [
             ("DeepSeek V4 Flash - Latest V4 fast model", "deepseek-v4-flash"),
+            ("DeepSeek V3.2", "deepseek-chat"),
+            ("Custom model ID", "custom"),
+        ],
+        "mid": [
+            ("DeepSeek V3.2 (thinking)", "deepseek-reasoner"),
             ("DeepSeek V3.2", "deepseek-chat"),
             ("Custom model ID", "custom"),
         ],
@@ -164,6 +203,11 @@ MODEL_OPTIONS: ProviderModeOptions = {
     "ollama": {
         "quick": [
             ("Qwen3:latest (8B)", "qwen3:latest"),
+            ("GPT-OSS:latest (20B)", "gpt-oss:latest"),
+            ("GLM-4.7-Flash:latest (30B)", "glm-4.7-flash:latest"),
+            ("Custom model ID", "custom"),
+        ],
+        "mid": [
             ("GPT-OSS:latest (20B)", "gpt-oss:latest"),
             ("GLM-4.7-Flash:latest (30B)", "glm-4.7-flash:latest"),
             ("Custom model ID", "custom"),
